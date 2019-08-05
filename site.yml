@@ -15,6 +15,7 @@
         owner: "{{ common_user }}"
         group: "{{ common_group }}"
   roles:
+    - calvinbui.ansible_nfs_client
     - calvinbui.ansible_docker
     - calvinbui.ansible_pip
     - calvinbui.ansible_docker_network
@@ -22,5 +23,9 @@
     - calvinbui.ansible_mariadb_docker
     - calvinbui.ansible_piwigo_docker
     - calvinbui.ansible_datadog
-  # post_tasks:
-  #   - name: Symlink Photos folder to Piwigo's Galleries
+  post_tasks:
+    - name: Symlink Photos folder to Piwigo's Galleries (paths are within container)
+      file:
+        src: "/photos"
+        dest: "{{ common_directory_config }/piwigo/www/gallery/photos"
+        state: link
