@@ -29,3 +29,4 @@
         src: "/photos"
         dest: "{{ common_directory_config }}/piwigo/www/gallery/photos"
         state: link
+        force: true
