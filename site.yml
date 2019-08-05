@@ -27,5 +27,5 @@
     - name: Symlink Photos folder to Piwigo's Galleries (paths are within container)
       file:
         src: "/photos"
-        dest: "{{ common_directory_config }/piwigo/www/gallery/photos"
+        dest: "{{ common_directory_config }}/piwigo/www/gallery/photos"
         state: link
