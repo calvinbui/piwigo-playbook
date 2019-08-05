@@ -1,5 +1,8 @@
 ---
 
+- src: calvinbui.ansible_apt
+  version: '1.1.0'
+
 - src: calvinbui.ansible_nfs_client
   version: '1.0.0'
 
@@ -20,6 +23,3 @@
 
 - src: calvinbui.ansible_traefik
   version: '1.1.1'
-
-- src: calvinbui.ansible_datadog
-  version: '1.0.2'
