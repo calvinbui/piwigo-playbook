@@ -32,17 +32,17 @@ use Digest::MD5 qw/md5 md5_hex/;
 
 my %opt = ();
 GetOptions(
-    \%opt,
-    qw/
-          base_url=s
-          username=s
-          password=s
-          directory=s
-          caddie=s
-		  privacy_level=s
-		  cat=s
-		  subcat=s
-      /
+  \%opt,
+  qw/
+  base_url=s
+  username=s
+  password=s
+  directory=s
+  caddie=s
+  privacy_level=s
+  cat=s
+  subcat=s
+  /
 );
 
 my $album_dir = $opt{directory};
@@ -54,22 +54,22 @@ $ua->cookie_jar({});
 
 my %conf;
 my %conf_default = (
-    base_url => 'http://localhost:81/piwigogit',
-    username => 'plg',
-    password => 'plg',
-	caddie => 0,
-	privacy_level => 4,
-	cat => 162,
-	subcat => 1,
+  base_url => 'http://localhost:81/piwigogit',
+  username => 'plg',
+  password => 'plg',
+  caddie => 0,
+  privacy_level => 4,
+  cat => 162,
+  subcat => 1,
 );
 
 foreach my $conf_key (keys %conf_default) {
-    $conf{$conf_key} = defined $opt{$conf_key} ? $opt{$conf_key} : $conf_default{$conf_key}
+  $conf{$conf_key} = defined $opt{$conf_key} ? $opt{$conf_key} : $conf_default{$conf_key}
 }
 
 $ua->default_headers->authorization_basic(
-    $conf{username},
-    $conf{password}
+  $conf{username},
+  $conf{password}
 );
 
 my $result = undef;
@@ -87,29 +87,29 @@ piwigo_refresh();
 #---------------------------------------------------------------------
 
 sub piwigo_login {
-    $ua->post(
-        $conf{base_url}.'/ws.php?format=json',
-        {
-            method => 'pwg.session.login',
-            username => $conf{username},
-            password => $conf{password},
-        }
-    );
+  $ua->post(
+    $conf{base_url}.'/ws.php?format=json',
+    {
+      method => 'pwg.session.login',
+      username => $conf{username},
+      password => $conf{password},
+    }
+  );
 }
 
 sub piwigo_refresh {
-	$ua->post(
-		$conf{base_url}.'/admin.php?page=site_update&site=1',
-		{
-			sync => 'files',
-			display_info => 0,
-			add_to_caddie => $conf{caddie},
-			privacy_level => $conf{privacy_level},
-			sync_meta  => 1,
-			simulate => 0,
-			cat => $conf{cat},
-			'subcats-included' => $conf{subcat},
-			submit => 1,
-		}
-	);
+  $ua->post(
+    $conf{base_url}.'/admin.php?page=site_update&site=1',
+    {
+      sync => 'files',
+      display_info => 0,
+      add_to_caddie => $conf{caddie},
+      privacy_level => $conf{privacy_level},
+      sync_meta  => 1,
+      simulate => 0,
+      cat => $conf{cat},
+      'subcats-included' => $conf{subcat},
+      submit => 1,
+    }
+  );
 }
