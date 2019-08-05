@@ -37,6 +37,6 @@
     - name: Create cronjob for Quick Sync
       cron:
         name: "Sync Gallery"
-        special_time: "daily"
+        special_time: "hourly"
         job: "perl {{ common_directory_config }}/piwigo_refresh.pl --base_url=https://{{ common_tld }} --user={{ common_user }} --password={{ mariadb_environment_variables.MYSQL_ROOT_PASSWORD }} --directory='./photos/'"
         state: present
