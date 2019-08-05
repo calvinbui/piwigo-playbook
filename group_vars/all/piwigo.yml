@@ -9,7 +9,7 @@ piwigo_volumes:
   - "{{ common_directory_photos }}:/photos"
 piwigo_environment_variables:
   PUID: "{{ common_user_id }}"
-  PGID: "{{ common_root_group }}"
+  PGID: "{{ common_group_id }}"
   TZ: "Australia/Sydney"
 
 piwigo_docker_additional_options:
