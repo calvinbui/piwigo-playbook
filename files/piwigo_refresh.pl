@@ -40,8 +40,6 @@ GetOptions(
   directory=s
   caddie=s
   privacy_level=s
-  cat=s
-  subcat=s
   /
 );
 
@@ -59,8 +57,6 @@ my %conf_default = (
   password => 'plg',
   caddie => 0,
   privacy_level => 4,
-  cat => 162,
-  subcat => 1,
 );
 
 foreach my $conf_key (keys %conf_default) {
@@ -99,7 +95,7 @@ sub piwigo_login {
 
 sub piwigo_refresh {
   $ua->post(
-    $conf{base_url}.'/admin.php?page=site_update&site=1',
+    $conf{base_url}.'/admin.php?page=site_update&site=2',
     {
       sync => 'files',
       display_info => 0,
@@ -107,8 +103,7 @@ sub piwigo_refresh {
       privacy_level => $conf{privacy_level},
       sync_meta  => 1,
       simulate => 0,
-      cat => $conf{cat},
-      'subcats-included' => $conf{subcat},
+      'subcats-included' => 1,
       submit => 1,
     }
   );
